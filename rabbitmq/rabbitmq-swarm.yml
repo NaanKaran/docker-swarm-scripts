@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:management  # Includes the management UI
+    deploy:
+      mode: replicated
+      replicas: 1  # Increase for clustering
+      restart_policy:
+        condition: on-failure
+      # placement:
+      #   constraints:
+      #     - node.role == worker  # Run on worker nodes
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=secretpassword
+      - RABBITMQ_ERLANG_COOKIE=my_secret_cluster_cookie  # Needed for clustering
+    ports:
+      - "5672:5672"    # RabbitMQ main communication port
+      - "15672:15672"  # RabbitMQ Management UI
+    networks:
+      - rabbitmq_net
+      - shared_internal_network
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq  # Persistent data storage
+
+networks:
+  rabbitmq_net:
+    driver: overlay
+  shared_internal_network:
+    external: true
+
+volumes:
+  rabbitmq_data:
+    driver: local
