@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: percona/percona-server-mongodb:latest
+    container_name: mongo
+    deploy:
+      mode: replicated
+      replicas: 1  # Change to >1 for replication
+      # placement:
+      #   constraints:
+      #     - node.role == worker  # Run on worker nodes (modify if needed)
+    ports:
+      - target: 27017
+        published: 27017
+        protocol: tcp
+        mode: host
+    volumes:
+      - mongo_data:/data/db  # Persistent storage for MongoDB
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: secretpassword
+    networks:
+      - mongo_net
+      - shared_internal_network
+
+volumes:
+  mongo_data:
+
+networks:
+  mongo_net:
+    driver: overlay
+  shared_internal_network:
+    external: true
