@@ -15,6 +15,7 @@ docker network create --driver overlay --attachable shared_internal_network 2>/d
 ./deploy_rabbitmq.sh
 ./deploy_redis.sh
 ./deploy_backend_api.sh
+./deploy_frontend_ui.sh
 
 echo "All services deployed!"
 docker service ls

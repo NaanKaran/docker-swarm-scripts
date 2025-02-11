@@ -7,7 +7,7 @@ services:
       - GF_SECURITY_ADMIN_USER=customadmin
       - GF_SECURITY_ADMIN_PASSWORD=mynewpassword
     ports:
-      - "3000:3000"
+      - "3003:3000"
     volumes:
       - grafana_data:/var/lib/grafana
     deploy:
@@ -26,6 +26,7 @@ services:
     image: prom/prometheus
     volumes:
       - prometheus_data:/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml  # Mount config file
     ports:
       - "9090:9090"
     deploy:
