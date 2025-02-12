@@ -14,7 +14,6 @@ services:
       - "8080:8080"
       - "32779:443"  # Expose port 8080 of the container to port 8081 on the host
     networks:
-      - backend_api_net
       - shared_internal_network
 
   response-api:
@@ -30,7 +29,6 @@ services:
       - "8081:8080"  # Expose port 8080 of the container to port 8081 on the host
       - "32780:443"  
     networks:
-      - backend_api_net
       - shared_internal_network
       
   master-api:
@@ -46,7 +44,6 @@ services:
       - "8082:8080"  # Expose port 8080 of the container to port 8081 on the host
       - "32781:443"
     networks:
-      - backend_api_net
       - shared_internal_network
 
   input-api:
@@ -61,12 +58,9 @@ services:
     ports:
       - "3000:3000"  # Expose port 8080 of the container to port 8081 on the host
     networks:
-      - backend_api_net
       - shared_internal_network
 
 
 networks:
-  backend_api_net:
-    driver: overlay
   shared_internal_network:
     external: true

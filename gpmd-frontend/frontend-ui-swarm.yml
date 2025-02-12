@@ -11,7 +11,6 @@ services:
     ports:
       - "4200:4200"
     networks:
-      - frontend_ui_net
       - shared_internal_network
 
       
@@ -25,11 +24,8 @@ services:
     ports:
       - "4201:4200"  # Expose port 8080 of the container to port 8081 on the host
     networks:
-      - frontend_ui_net
       - shared_internal_network
 
 networks:
-  frontend_ui_net:
-    driver: overlay
   shared_internal_network:
     external: true
