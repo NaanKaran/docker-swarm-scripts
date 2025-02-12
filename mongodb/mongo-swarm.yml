@@ -21,14 +21,11 @@ services:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: secretpassword
     networks:
-      - mongo_net
       - shared_internal_network
 
 volumes:
   mongo_data:
 
 networks:
-  mongo_net:
-    driver: overlay
   shared_internal_network:
     external: true

@@ -19,14 +19,11 @@ services:
       - "5672:5672"    # RabbitMQ main communication port
       - "15672:15672"  # RabbitMQ Management UI
     networks:
-      - rabbitmq_net
       - shared_internal_network
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq  # Persistent data storage
 
 networks:
-  rabbitmq_net:
-    driver: overlay
   shared_internal_network:
     external: true
 
