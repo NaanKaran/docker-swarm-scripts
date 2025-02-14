@@ -9,4 +9,3 @@ docker stack rm $STACK_NAME
 
 sleep 5
 docker service ls | grep $STACK_NAME || echo "Frontend-UI removed successfully!"
-```
