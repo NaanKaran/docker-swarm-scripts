@@ -22,7 +22,7 @@ services:
       restart_policy:
         condition: on-failure
     ports:
-      - "4201:4200"  # Expose port 8080 of the container to port 8081 on the host
+      - "4201:4201"  # Expose port 8080 of the container to port 8081 on the host
     networks:
       - shared_internal_network
 
