@@ -2,7 +2,7 @@
 
 echo "Removing all services..."
 
-./remove_portainer.sh
+# ./remove_portainer.sh
 ./remove_mongo.sh
 ./remove_minio.sh
 ./remove_rabbitmq.sh
