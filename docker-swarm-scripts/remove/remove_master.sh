@@ -10,5 +10,7 @@ echo "Removing all services..."
 ./remove_redis.sh
 ./remove_backend_api.sh
 ./remove_frontend_ui.sh
+./remove_functions.sh
+./remove_nginx.sh
 
 echo "All services removed!"

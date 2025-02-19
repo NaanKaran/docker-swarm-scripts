@@ -16,6 +16,7 @@ docker network create --driver overlay --attachable shared_internal_network 2>/d
 ./deploy_redis.sh
 ./deploy_backend_api.sh
 ./deploy_frontend_ui.sh
+./deploy_functions.sh
 ./deploy_nginx.sh
 
 echo "All services deployed!"
