@@ -8,7 +8,7 @@ echo "Creating shared network..."
 docker network create --driver overlay --attachable shared_internal_network 2>/dev/null || echo "Network already created."
 
 # Deploy individual services
-./deploy_portainer.sh
+# ./deploy_portainer.sh
 ./deploy_monitoring.sh
 ./deploy_mongo.sh
 ./deploy_minio.sh
