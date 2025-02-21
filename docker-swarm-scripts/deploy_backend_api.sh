@@ -17,7 +17,7 @@ echo "$ACR_PASSWORD" | docker login "$ACR_URL" -u "$ACR_USERNAME" --password-std
 
 # Deploy the custom stack with Response API image
 echo "🚀 Deploying Response API with custom image..."
-docker stack deploy -c "$COMPOSE_FILE" "$STACK_NAME"
+docker stack deploy -c "$COMPOSE_FILE" "$STACK_NAME" --prune --resolve-image always
 
 # Wait for services to be ready
 echo "⌛ Waiting for Response API service to be ready..."
