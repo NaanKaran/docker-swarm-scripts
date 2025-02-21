@@ -13,6 +13,18 @@ services:
     networks:
       - shared_internal_network
 
+  external-api-function:
+    image: naankaran/external-api-function-dc:dc-new
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    env_file:
+      - ./external-api-function.env   # Reference to the external environment file
+    networks:
+      - shared_internal_network
+
 networks:
   shared_internal_network:
     external: true
