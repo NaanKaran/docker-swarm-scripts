@@ -25,6 +25,18 @@ services:
     networks:
       - shared_internal_network
 
+  delete-responses-function:
+    image: naankaran/naankaran/formresponseapidc:dc-new
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    env_file:
+      - ./delete-responses.env   # Reference to the external environment file
+    networks:
+      - shared_internal_network
+
 networks:
   shared_internal_network:
     external: true
