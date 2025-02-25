@@ -49,6 +49,18 @@ services:
     networks:
       - shared_internal_network
 
+  async-log-function:
+    image: naankaran/async-log-dc:dc-new
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    env_file:
+      - ./async-log.env   # Reference to the external environment file
+    networks:
+      - shared_internal_network
+
 networks:
   shared_internal_network:
     external: true
