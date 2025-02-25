@@ -37,7 +37,7 @@ services:
     networks:
       - shared_internal_network
 
-  delete-responses-function:
+  recalculate-function:
     image: naankaran/recalculate-function-dc:dc-new
     deploy:
       mode: replicated
