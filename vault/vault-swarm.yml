@@ -8,17 +8,30 @@ services:
     cap_add:
       - IPC_LOCK
     environment:
-      VAULT_ADDR: "http://0.0.0.0:8200"
-      VAULT_CLUSTER_ADDR: "http://0.0.0.0:8201"
+      VAULT_ADDR: "http://vault:8200"  # Use service name for API address
+      VAULT_API_ADDR: "http://vault:8200"
+      VAULT_CLUSTER_ADDR: "http://vault:8201"
     deploy:
       mode: replicated
-      replicas: 1  # Increase for HA
+      replicas: 1
       restart_policy:
         condition: on-failure
     volumes:
       - vault_data:/vault/file
-      - ./vault-config:/vault/config 
+      - ./vault-config:/vault/config
+    secrets:
+      - vault_config
     command: vault server -config=/vault/config/vault.hcl
+    networks:
+      - shared_internal_network
 
 volumes:
   vault_data:
+
+secrets:
+  vault_config:
+    file: ./vault-config/vault.hcl
+
+networks:
+  shared_internal_network:
+    external: true
