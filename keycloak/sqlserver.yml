@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    user: root  # Runs as root to avoid permission issues
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Qwertyuiop!
+      - MSSQL_PID=Express
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql-data:/var/opt/mssql
+    deploy:
+      resources:
+        limits:
+          memory: 2G  # Ensure enough memory
+    networks:
+      - shared_internal_network
+    command: [ "/bin/bash", "-c", "chown -R 10001:10001 /var/opt/mssql && /opt/mssql/bin/sqlservr" ]
+
+volumes:
+  mssql-data:
+
+networks:
+  shared_internal_network:
+    external: true

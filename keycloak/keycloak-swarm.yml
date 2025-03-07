@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  keycloak:
+    image: prodprogpmdacr.azurecr.io/gpmd/keycloak:prod_5
+    environment:
+      SMS_PROVIDER_SERVER: msg91
+      SMS_TOKEN_EXPIRES: 180
+      SMS_HOUR_MAXIMUM: 3
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KC_DB: mssql
+      KC_DB_URL: jdbc:sqlserver://mssql:1433;database=keycloakdb;user=sa;password=Qwertyuiop!;encrypt=false;trustServerCertificate=true;
+      DB_USERNAME: sa
+      KC_DB_PASSWORD: Qwertyuiop!
+      KC_DB_DRIVER: com.microsoft.sqlserver.jdbc.SQLServerDriver
+      KC_DB_SCHEMA: dbo
+      KC_HTTP_ENABLED: "true"
+      KC_HTTP_PORT: "8080"
+    ports:
+      - "8080:8080"
+    entrypoint: "/opt/keycloak/bin/kc.sh"
+    networks:
+      - shared_internal_network
+    command: "start-dev --spi-phone-default-source-hour-maximum=0 --spi-phone-default-target-hour-maximum=0 --spi-phone-default-token-expires-in=120 --spi-phone-default-canonicalize-phone-numbers=E164 --spi-phone-default-phone-default-region=IN"
+networks:
+  shared_internal_network:
+    external: true
