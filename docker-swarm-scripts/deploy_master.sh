@@ -9,14 +9,16 @@ docker network create --driver overlay --attachable shared_internal_network 2>/d
 
 # Deploy individual services
 ./deploy_portainer.sh
-./deploy_monitoring.sh
-./deploy_mongo.sh
-./deploy_minio.sh
-./deploy_rabbitmq.sh
-./deploy_redis.sh
-./deploy_backend_api.sh
-./deploy_frontend_ui.sh
-./deploy_nginx.sh
+#./deploy_postgres.sh
+#./deploy_clickhouse.sh
+# ./deploy_monitoring.sh
+# ./deploy_mongo.sh
+# ./deploy_minio.sh
+# ./deploy_rabbitmq.sh
+# ./deploy_redis.sh
+#./deploy_pinecone.sh
+# ./deploy_nginx.sh
+./deploy_keycloak.sh
 
 echo "All services deployed!"
 docker service ls

@@ -11,7 +11,7 @@ services:
         constraints:
           - node.role == manager  # Ensure Portainer runs only on manager nodes
     ports:
-      - "9009:9000"  # Web UI
+      - "9001:9000"  # Web UI
       - "9443:9443"  # Secure Web UI (HTTPS)
     volumes:
       - portainer_data:/data  # Persistent storage for Portainer

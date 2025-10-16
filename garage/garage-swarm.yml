@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  garage:
+    image: dxflrs/garage:v1.0.0
+    networks:
+      - garage-network
+    ports:
+      - "3900:3900"
+      - "3901:3901"
+      - "3902:3902"
+    volumes:
+      - ./garage.toml:/etc/garage.toml
+      - ./meta:/var/lib/garage/meta
+      - ./data:/var/lib/garage/data
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: unless-stopped
+      placement:
+        constraints:
+          - node.role == manager
+
+networks:
+  garage-network:
+    driver: overlay
+    attachable: true
